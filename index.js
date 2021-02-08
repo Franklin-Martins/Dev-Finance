@@ -70,9 +70,22 @@ const Transaction = {
                 //somar a uma variável e retornar a variável
                 income += transaction.amount;
             }
+
         })
 
         return income
+    },
+    //retorna a maior entrada até o momento
+    biggestIncome(){
+        let biggestIncome = 0
+
+        Transaction.all.forEach(transaction =>{
+            if (transaction.amount > 0 && transaction.amount > biggestIncome){
+                biggestIncome = transaction.amount
+            }
+        })
+
+        return biggestIncome
     },
     //calcula o valor total das saídas
     expenses() {
@@ -84,6 +97,17 @@ const Transaction = {
             }
         })
         return expense
+    },
+    //retorna o maior valor de saída
+    biggestExpense(){
+        let biggestExpense = 0
+
+        Transaction.all.forEach(transaction => {
+            if (transaction.amount < 0 && transaction.amount < biggestExpense) {
+                biggestExpense = transaction.amount
+            }
+        })
+        return biggestExpense
     },
     //calcula o total que ainda resta
     total() {
@@ -125,12 +149,19 @@ const DOM = {
     },
 
     updateBalance() {
+        let backgroundTotal
         document.getElementById('incomeDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.incomes())
+        
+        document.getElementById('biggestIncomeDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.biggestIncome())
 
         document.getElementById('expenseDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.expenses())
 
+        document.getElementById('biggestExpenseDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.biggestExpense())
+        
         document.getElementById('totalDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.total())
 
@@ -168,6 +199,10 @@ const Utils = {
         const splittedDate = date.split("-")
         
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+    },
+    
+    biggestIncomeValue(){
+
     }
 }
 
@@ -263,3 +298,5 @@ const App = {
 
 
 App.init()
+
+

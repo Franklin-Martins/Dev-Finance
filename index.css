@@ -142,13 +142,28 @@ header {
     font-size: 2rem;
     line-height: 3rem;
 
-    margin-top: 1rem;
+    margin-top: .2rem;
 }
 
-.card.total{
-    background: var(--green);
-    color: white;
+#maiorValor {
+    margin-top: 0.5rem;
 }
+
+#biggestIncomeDisplay {
+    margin-top: 2px;
+    color: var(--light-green);
+}
+
+#biggestExpenseDisplay {
+    margin-top: 2px;
+    color: var(--red);
+}
+
+.card.total {
+    color: white;
+    background-color: var(--green);
+}
+
 /*========== TABLE ===========*/
 #transaction{
     display: block;
@@ -224,6 +239,8 @@ td.expense{
 
     opacity: 0;
     visibility: hidden;
+
+    z-index: 999;
 }
 
 .modal-overlay.active {
@@ -236,6 +253,9 @@ td.expense{
     padding: 2.4rem;
     width: 90%;
     max-width: 500px;
+
+    position: relative;
+    z-index: 1;
 }
 /*========== FORM ===========*/
 #form{
