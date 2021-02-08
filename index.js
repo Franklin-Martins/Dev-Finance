@@ -134,6 +134,7 @@ const DOM = {
         const CSSclass = transaction.amount > 0 ? "income" : "expense"
 
         //formata o valor da despesa ou ganho
+        console.log(transaction.amount)
         const amount = Utils.formatCurrency(transaction.amount)
 
         const html = ` 
@@ -190,9 +191,9 @@ const Utils = {
     },
 
     formatAmount(value) {
-        value = Number(value) * 100
+        value = (Number(value) * 100)
 
-        return value
+        return Math.round(value)
     },
 
     formatDate(date) {
@@ -200,10 +201,6 @@ const Utils = {
         
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
     },
-    
-    biggestIncomeValue(){
-
-    }
 }
 
 const Form = {
