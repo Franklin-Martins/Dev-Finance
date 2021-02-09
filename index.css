@@ -76,7 +76,8 @@ button:hover{
 }
 
 .button.new {
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: .8rem;
 }
 .button.cancel{

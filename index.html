@@ -62,7 +62,15 @@
         <section id="transaction">
             <h2 class="sr-only">Transações</h2>
 
-            <a href="#" onclick="Modal.open()" class="button new">+ Nova transação</a>
+            <div class="button new">
+                <a href="#" onclick="Modal.open()" >+ Nova transação</a>
+                <select href="#" onclick="" >
+                    <option value="">Filtro</option>
+                    <option value="1">Nome</option>
+                    <option value="2">Data</option>
+                    <option value="3">Valor</option>
+                </select>
+            </div>
             <table id="data-table">
                 <thead>
                     <tr>
