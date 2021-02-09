@@ -64,11 +64,12 @@
 
             <div class="button new">
                 <a href="#" onclick="Modal.open()" >+ Nova transação</a>
-                <select href="#" onclick="" >
-                    <option value="">Filtro</option>
-                    <option value="1">Nome</option>
-                    <option value="2">Data</option>
-                    <option value="3">Valor</option>
+                <select id="filter" href="#" onchange="App.reload()" >
+                    <option value="name">Nome</option>
+                    <option value="dateOld">Data (Mais antiga)</option>
+                    <option value="dateRecent">Data (Mais atual)</option>
+                    <option value="valueC">Valor (crescente)</option>
+                    <option value="valueD">Valor (decrescente)</option>
                 </select>
             </div>
             <table id="data-table">

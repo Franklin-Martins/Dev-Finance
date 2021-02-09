@@ -109,6 +109,10 @@ const Transaction = {
         })
         return biggestExpense
     },
+    //Faz a ordenação da lista
+    filter(){
+
+    },
     //calcula o total que ainda resta
     total() {
         return Transaction.incomes() + Transaction.expenses()
@@ -134,7 +138,7 @@ const DOM = {
         const CSSclass = transaction.amount > 0 ? "income" : "expense"
 
         //formata o valor da despesa ou ganho
-        console.log(transaction.amount)
+        //console.log(transaction.amount)
         const amount = Utils.formatCurrency(transaction.amount)
 
         const html = ` 
@@ -278,9 +282,67 @@ const App = {
         //Para cada dado presente no array transactions chama o método
         //addTransaction do objeto DOM para poder renderizar os dados
         //no HTML.
+        const type = document.getElementById("filter").selectedIndex;
+        let aux = []
+
         Transaction.all.forEach((transaction, index) => {
-            DOM.addTransaction(transaction, index)
+            aux.push(transaction)
+            //DOM.addTransaction(transaction, index)
         })
+        //Ordena a listagem da tabela por nome
+        if(document.getElementsByTagName("option")[type].value === "name"){
+            aux.sort(function(a,b) {
+                return a.description < b.description ? -1 : a.description > b.description ? 1 : 0;
+            });
+         
+            aux.map((item)=>{
+                console.log(item)
+                DOM.addTransaction(item)
+            })    
+        }
+        //Ordena a listagem da tabela por valor crescente
+        if(document.getElementsByTagName("option")[type].value === "valueC"){
+            aux.sort(function(a,b) {
+                return a.amount < b.amount ? -1 : a.amount > b.amount ? 1 : 0;
+            });
+         
+            aux.map((item)=>{
+                console.log(item)
+                DOM.addTransaction(item)
+            })    
+        }
+        //Ordena a listagem da tabela por valor decrescente
+        if(document.getElementsByTagName("option")[type].value === "valueD"){
+            aux.sort(function(a,b) {
+                return a.amount > b.amount ? -1 : a.amount < b.amount ? 1 : 0;
+            });
+         
+            aux.map((item)=>{
+                console.log(item)
+                DOM.addTransaction(item)
+            })    
+        }
+        if(document.getElementsByTagName("option")[type].value === "dateRecent"){
+            aux.sort(function(a,b) {
+                return a.date > b.date ? -1 : a.amount < b.date ? 1 : 0;
+            });
+         
+            aux.map((item)=>{
+                console.log(item)
+                DOM.addTransaction(item)
+            })    
+        }
+
+        if(document.getElementsByTagName("option")[type].value === "dateOld"){
+            aux.sort(function(a,b) {
+                return a.date < b.date ? -1 : a.amount > b.date ? 1 : 0;
+            });
+         
+            aux.map((item)=>{
+                console.log(item)
+                DOM.addTransaction(item)
+            })    
+        }
 
         DOM.updateBalance()
         
