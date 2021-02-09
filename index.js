@@ -282,8 +282,8 @@ const OrderedTransaction = {
         }
         //Ordena por nome decrescente
         if(type === "nameD"){
-            aux.sort((a, b)=>{
-                return a.name > b.name ? -1: a < b ? 1 : 0
+            aux.sort(function(a, b){
+                return a.description > b.description ? -1: a.description < b.description ? 1 : 0
             })
         }
         //Ordena a listagem da tabela por valor crescente
