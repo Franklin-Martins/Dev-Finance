@@ -14,25 +14,6 @@ const Modal = {
     }
 }
 
-// Array que contem os dados das transações já feitas
-/*const transactions = [
-    {
-        description: 'Luz',
-        amount: -50000,
-        date: '23/01/2021'
-    },
-    {
-        description: 'Website',
-        amount: 500000,
-        date: '23/01/2021'
-    },
-    {
-        description: 'Internet',
-        amount: -20000,
-        date: '23/01/2021'
-    },
-]*/
-
 const Storage = {
     get() {
         return JSON.parse(localStorage.getItem("dev.finances:transactions")) ||
