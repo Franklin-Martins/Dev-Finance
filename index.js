@@ -109,10 +109,6 @@ const Transaction = {
         })
         return biggestExpense
     },
-    //Faz a ordenação da lista
-    filter(){
-
-    },
     //calcula o total que ainda resta
     total() {
         return Transaction.incomes() + Transaction.expenses()
@@ -276,6 +272,55 @@ const Form = {
 
 }
 
+const OrderedTransaction = {
+    execute(type, aux){
+        //Ordena por nome crescente
+        if(type === "nameC"){
+            aux.sort(function(a,b) {
+                return a.description < b.description ? -1 : a.description > b.description ? 1 : 0;
+            });
+        }
+        //Ordena por nome decrescente
+        if(type === "nameD"){
+            aux.sort(function(a, b){
+                return a.description > b.description ? -1: a.description < b.description ? 1 : 0
+            })
+        }
+        //Ordena a listagem da tabela por valor crescente
+        if(type === "valueC"){
+            aux.sort(function(a,b) {
+                return a.amount < b.amount ? -1 : a.amount > b.amount ? 1 : 0;
+            }); 
+        }
+        //Ordena a listagem da tabela por valor decrescente
+        if(type === "valueD"){
+            aux.sort(function(a,b) {
+                return a.amount > b.amount ? -1 : a.amount < b.amount ? 1 : 0;
+            });
+         
+               
+        }
+        //Ordena a listagem da tabela por mais recente
+        if(type === "dateRecent"){
+            aux.sort(function(a,b) {
+                return a.date > b.date ? -1 : a.amount < b.date ? 1 : 0;
+            });
+         
+              
+        }
+        //Ordena a listagem da tabela por mais antiga
+        if(type === "dateOld"){
+            aux.sort(function(a,b) {
+                return a.date < b.date ? -1 : a.amount > b.date ? 1 : 0;
+            });    
+        }
+        //Atualiza a lista com os dados ordenados e coloca no HTML
+        aux.map((item)=>{
+        console.log(item)
+        DOM.addTransaction(item)
+        })
+    }
+}
 
 const App = {
     init() {
@@ -285,64 +330,13 @@ const App = {
         const type = document.getElementById("filter").selectedIndex;
         let aux = []
 
-        Transaction.all.forEach((transaction, index) => {
+        Transaction.all.forEach((transaction) => {
             aux.push(transaction)
-            //DOM.addTransaction(transaction, index)
         })
-        //Ordena a listagem da tabela por nome
-        if(document.getElementsByTagName("option")[type].value === "name"){
-            aux.sort(function(a,b) {
-                return a.description < b.description ? -1 : a.description > b.description ? 1 : 0;
-            });
-         
-            aux.map((item)=>{
-                console.log(item)
-                DOM.addTransaction(item)
-            })    
-        }
-        //Ordena a listagem da tabela por valor crescente
-        if(document.getElementsByTagName("option")[type].value === "valueC"){
-            aux.sort(function(a,b) {
-                return a.amount < b.amount ? -1 : a.amount > b.amount ? 1 : 0;
-            });
-         
-            aux.map((item)=>{
-                console.log(item)
-                DOM.addTransaction(item)
-            })    
-        }
-        //Ordena a listagem da tabela por valor decrescente
-        if(document.getElementsByTagName("option")[type].value === "valueD"){
-            aux.sort(function(a,b) {
-                return a.amount > b.amount ? -1 : a.amount < b.amount ? 1 : 0;
-            });
-         
-            aux.map((item)=>{
-                console.log(item)
-                DOM.addTransaction(item)
-            })    
-        }
-        if(document.getElementsByTagName("option")[type].value === "dateRecent"){
-            aux.sort(function(a,b) {
-                return a.date > b.date ? -1 : a.amount < b.date ? 1 : 0;
-            });
-         
-            aux.map((item)=>{
-                console.log(item)
-                DOM.addTransaction(item)
-            })    
-        }
 
-        if(document.getElementsByTagName("option")[type].value === "dateOld"){
-            aux.sort(function(a,b) {
-                return a.date < b.date ? -1 : a.amount > b.date ? 1 : 0;
-            });
-         
-            aux.map((item)=>{
-                console.log(item)
-                DOM.addTransaction(item)
-            })    
-        }
+        //Faz a ordenação de acordo com o valor da option
+        OrderedTransaction.execute(document.getElementsByTagName("option")[type].value, aux)
+        
 
         DOM.updateBalance()
         
