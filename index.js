@@ -134,7 +134,6 @@ const DOM = {
         const CSSclass = transaction.amount > 0 ? "income" : "expense"
 
         //formata o valor da despesa ou ganho
-        //console.log(transaction.amount)
         const amount = Utils.formatCurrency(transaction.amount)
 
         const html = ` 
@@ -276,9 +275,7 @@ const OrderedTransaction = {
     execute(type, aux){
         //Ordena por nome crescente
         if(type === "nameC"){
-            aux.sort(function(a,b) {
-                return a.description < b.description ? -1 : a.description > b.description ? 1 : 0;
-            });
+            aux.sort();
         }
         //Ordena por nome decrescente
         if(type === "nameD"){
@@ -303,7 +300,13 @@ const OrderedTransaction = {
         //Ordena a listagem da tabela por mais recente
         if(type === "dateRecent"){
             aux.sort(function(a,b) {
-                return a.date > b.date ? -1 : a.amount < b.date ? 1 : 0;
+                let aux = String(a.date).split("/")
+                let aux1 = String(b.date).split("/")
+                aux = new Date(`${aux[2]}-${aux[1]}-${aux[0]} `)
+                aux1 = new Date(`${aux1[2]}-${aux1[1]}-${aux1[0]} `)
+               
+
+                return aux > aux1 ? -1 : aux < aux1 ? 1 : 0;
             });
          
               
@@ -311,13 +314,18 @@ const OrderedTransaction = {
         //Ordena a listagem da tabela por mais antiga
         if(type === "dateOld"){
             aux.sort(function(a,b) {
-                return a.date < b.date ? -1 : a.amount > b.date ? 1 : 0;
+                let aux = String(a.date).split("/")
+                let aux1 = String(b.date).split("/")
+                aux = new Date(`${aux[2]}-${aux[1]}-${aux[0]} `)
+                aux1 = new Date(`${aux1[2]}-${aux1[1]}-${aux1[0]} `)
+
+                return aux < aux1 ? -1 : aux > aux1 ? 1 : 0;
             });    
         }
         //Atualiza a lista com os dados ordenados e coloca no HTML
-        aux.map((item)=>{
+        aux.map((item, index)=>{
         console.log(item)
-        DOM.addTransaction(item)
+        DOM.addTransaction(item,index)
         })
     }
 }
