@@ -55,6 +55,14 @@ a{
 a:hover{
     color: var(--light-green);
 }
+select{
+    color: var(--green);
+    text-decoration: none;
+}
+
+select:hover{
+    color: var(--light-green);
+}
 
 button{
     width: 100%;
@@ -78,7 +86,19 @@ button:hover{
 .button.new {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: .8rem;
+}
+.button.new select{
+    width: 100%;
+    max-width: 20ch;
+    color: var(--green);
+    border: none;
+    background-color: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1.1;
 }
 .button.cancel{
     color: var(--red);
