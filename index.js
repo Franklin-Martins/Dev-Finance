@@ -254,9 +254,15 @@ const Form = {
 
 const OrderedTransaction = {
     execute(type, aux){
+        //Ordenação pardrão, sem filtros
+        if(type === ""){
+            aux.sort();
+        }
         //Ordena por nome crescente
         if(type === "nameC"){
-            aux.sort();
+            aux.sort(function(a, b){
+                return a.description < b.description ? -1: a.description > b.description ? 1 : 0
+            })
         }
         //Ordena por nome decrescente
         if(type === "nameD"){
