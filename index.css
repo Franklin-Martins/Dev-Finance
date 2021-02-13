@@ -15,9 +15,43 @@ html{
     font-size: 93.75%;
 }
 
+header{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
 body{
     background: #f0f2f5;
     font-family: 'Poppins', sans-serif;
+}
+#checkbox{
+    opacity: 0;
+}
+.checkbox:checked + .ball{
+    background-color: purple;
+}
+.toggle-button{
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: var(--light-green);
+    margin-right: 20px;
+    margin-top: 20px;
+    top: 0;
+    right: 0;
+}
+
+.ball{
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: #fff;
+    top: 0;
+    right: 0;
 }
 
 .sr-only {
