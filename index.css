@@ -26,13 +26,13 @@ body{
     background: #f0f2f5;
     font-family: 'Poppins', sans-serif;
 }
-#checkbox{
+.checkbox{
     opacity: 0;
 }
 .checkbox:checked + .ball{
-    background-color: purple;
+    transform: translateX(-40px);
 }
-.toggle-button{
+.toggle-button-container{
     position: absolute;
     width: 90px;
     height: 40px;
@@ -52,6 +52,7 @@ body{
     background-color: #fff;
     top: 0;
     right: 0;
+    transition: transform 0.2s;
 }
 
 .sr-only {
